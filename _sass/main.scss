@@ -1,0 +1,151 @@
+@charset "utf-8";
+
+// Customization
+
+// You can easily customize Bulma with your own variables.
+// Just uncomment the following block to see the result.
+
+
+// 1. Import the initial variables
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+
+$info: $blue;
+$primary: #8972da;
+$body-background-color: $white-bis;
+$navbar-dropdown-arrow: $red;
+$navbar-item-hover-color: $black;
+$navbar-item-hover-background-color: $white-bis;
+$navbar-dropdown-item-hover-background-color: $white-bis;
+
+@import "../node_modules/bulma/bulma";
+
+@media screen and (min-width: 1024px) {
+    .main-navbar-style {
+        width: 66.66667%; 
+        margin-left: 16.66667%;
+    }
+}
+
+a {
+    outline: 0;
+ }
+
+code {
+    color: #ff3838;
+    padding: 0.25em 0 0.25em;
+    cursor: default;
+    user-select: none;
+}
+.code {
+    font-family: monospace !important;
+}
+
+.discord-tag {
+    padding: 0 2px;
+    font-weight: 500;
+    color: #7289da;
+    background-color: rgba(114,137,218,.1);
+    font-size: 1.1em;
+    font-family: Whitney-Medium, BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !important;
+}
+
+.banner {
+    background-image: url("../haseulheejin.jpg");
+
+    width: 100%;
+    height: 0;
+    padding-top: 68.19%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image img {
+    width: auto;
+}
+
+.back-navbar {
+    box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+}
+
+.discord-button {
+    background-color:#7289da !important;
+}
+.discord-button:hover {
+    background-color:#677bc4 !important;
+}
+
+.patreon-button {
+    background-color: #ff6633 !important;
+}
+.patreon-button:hover {
+    background-color: #ef5725 !important;
+}
+
+.perm-button {
+    margin-left: 0.2em;
+    background-color: $primary !important;
+}
+
+.card {
+    margin: 30px auto;
+    border-radius: 10px;
+}
+
+.card-header {
+    border-radius: 10px 10px 0 0;
+}
+.card-header h3 {
+    font-size: 1.5em;
+    margin-bottom: 0;
+}
+
+.spacer {
+    height: 1em;
+}
+
+.command-header {
+    align-items: stretch;
+    display: flex;
+    margin-top: 32px;
+}
+
+.anchor-target {
+    padding-top: 100px;
+    margin-top: -100px;
+    z-index: -1000;
+}
+
+.header-link {
+    color: $grey-darker;
+    
+}
+.header-link:hover {
+    color: $blue;
+}
+
+
+.tooltip {
+    text-decoration:none;
+    position:relative;
+    cursor: pointer;
+}
+.tooltip > * {
+    display:none;
+}
+.tooltip:hover > * {
+    display:block;
+    position:fixed;
+    overflow:hidden;
+}
+.tooltip-card {
+    padding: 5px;
+    margin: 5px; 
+    background-color: $grey-darker;
+    opacity: 0.98;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    border-radius: 5px !important;
+}
+.tooltip-span {
+    z-index: 50;
+}
