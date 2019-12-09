@@ -74,6 +74,12 @@ const COMMANDS = {
         { name: "donate", aliases: ['patreon'] }
       ],
       desc: "Provides a link to Haseul Bot's <a href=\"https://www.patreon.com/haseulbot\">Patreon</a> page.",
+    },
+    {
+      cmds: [
+        { name: "donators", aliases: ['patrons', 'donors', 'supporters'] }
+      ],
+      desc: "Provides a list of all the Discord users who support Haseul Bot on Patreon!",
     }
   ],
   "Profiles": [
@@ -270,6 +276,108 @@ const COMMANDS = {
       desc: "Searches YouTube for your query and returns the first 20 results.",
     },
   ],
+  "Instagram": [
+    {
+      cmds: [
+        { name: "instagram", aliases: ['insta'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "add" }
+      ],
+      args: [
+        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] },
+        { name: "(mention role)", examples: ["Twitter", "notification"] }
+      ],
+      desc: "Adds an Instagram account to be notified for new posts/stories from in the provided channel. If a mention role is provided, that role will be mentioned for notifications.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "instagram", aliases: ['insta'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "remove", aliases: ['delete'] }
+      ],
+      args: [
+        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] }
+      ],
+      desc: "Removes an Instagram account notification from the given channel.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "instagram", aliases: ['insta'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "list" }
+      ],
+      desc: "Shows a list of all the Instagram notifications you have in the server.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "instagram", aliases: ['insta'] },
+        { name: "toggle"},
+        { name: "stories", aliases: ['story'] }
+      ],
+      args: [
+        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] }
+      ],
+      desc: "Toggles notifications from Instagram stories. <span class=\"has-text-grey-light\">(on by default)</span>",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    }
+  ],
+  "Twitter": [
+    {
+      cmds: [
+        { name: "twitter", aliases: ['twt'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "add" }
+      ],
+      args: [
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] },
+        { name: "(mention role)", examples: ["Twitter", "notification"] }
+      ],
+      desc: "Adds a Twitter account to be notified for new tweets/retweets from in the provided channel. If a mention role is provided, that role will be mentioned for notifications.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "twitter", aliases: ['twt'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "remove", aliases: ['delete'] }
+      ],
+      args: [
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] }
+      ],
+      desc: "Removes a Twitter account notification from the given channel.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "twitter", aliases: ['twt'] },
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "list" }
+      ],
+      desc: "Shows a list of all the Twitter notifications you have in the server.",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "twitter", aliases: ['twt'] },
+        { name: "toggle"},
+        { name: "retweets", aliases: ['rts'] }
+      ],
+      args: [
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] }
+      ],
+      desc: "Toggles notifications from retweets. <span class=\"has-text-grey-light\">(on by default)</span>",
+      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    }
+  ],
   "VLIVE": [
     {
       cmds: [
@@ -319,14 +427,15 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "vpick"},
-        { name: "toggle"}
+        { name: "vlive"},
+        { name: "toggle"},
+        { name: "vpick"}
       ],
       args: [
         { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"]},
         { name: "[discord channel]", examples: ["<span class=\"discord-tag\" >#vlive-feed</span>", '482750802377703426'] }
       ],
-      desc: "Toggles notifications from VPICK.",
+      desc: "Toggles notifications from VPICK. <span class=\"has-text-grey-light\">(on by default)</span>",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     }
   ],
@@ -428,7 +537,7 @@ const COMMANDS = {
   "Custom Commands": [
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "add" }
       ],
       args: [
@@ -439,7 +548,7 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "remove", aliases: ['delete'] }
       ],
       args: [
@@ -449,7 +558,7 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "rename" }
       ],
       args: [
@@ -460,7 +569,7 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "edit" }
       ],
       args: [
@@ -471,20 +580,27 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "list" }
       ],
       desc: "Shows a list of all the commands in the server."
     },
     {
       cmds: [
-        { name: "command", aliases: ['cmd'] },
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "search" }
       ],
       args: [
         { name: "[command query]", examples: ["haseul"] },
       ],
       desc: "Shows a list of commands matching the given command query."
+    },
+    {
+      cmds: [
+        { name: "command", aliases: ['commands', 'cmd'] },
+        { name: "toggle" }
+      ],
+      desc: "Toggles the ability to use custom commands on and off. <span class=\"has-text-grey-light\">(on by default)</span>"
     }
   ],
   "Emoji": [
@@ -772,6 +888,15 @@ const COMMANDS = {
         { name: "[text]", examples: ["I'm hungry"] },
       ],
       desc: "Translates text from a given source language to the target language, or if no source language is provided, the language is auto detected. You can find language codes <a href=\"./languages/\">here</a>."
+    },
+    {
+      cmds: [
+        { name: "colour", aliases: ['color'] },
+      ],
+      args: [
+        { name: "[colour]", examples: ['#ff0000', '#03a750', '255 0 0', '34, 243, 51', 'random'] },
+      ],
+      desc: "Displays a colour. Can display based on hexadecimal codes, rgb values or can be supplied with \"random\" to return a randomly generated colour."
     }
   ],
 }
