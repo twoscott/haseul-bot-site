@@ -1,111 +1,101 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Haseul Bot</title>
-    <link rel="icon" href="haseulbot.jpg">
-    <link rel="stylesheet" href="css/main.css">
-    <script src="lib/jquery.min.js"></script>
-    <script src="lib/main.js"></script>
-  </head>
-  <body>
-    <section class="navbar is-fixed-top back-navbar"></section>
-    <section class="navbar is-fixed-top main-navbar-style">
-      <div class="navbar-brand">
-        <figure class="image navbar-item">
-          <a href="#"><img class="image is-rounded" src="haseulbot.jpg"></a>
-        </figure>
-        <a role="button" class="navbar-burger burger" data-target="main-navbar">
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </a>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Haseul Bot</title>
+  <link rel="icon" href="haseulbot.jpg">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="lib/jquery.min.js"></script>
+  <script src="lib/main.js"></script>
+</head>
+
+<body>
+  <section class="navbar is-fixed-top back-navbar"></section>
+  <section class="navbar is-fixed-top main-navbar-style">
+    <div class="navbar-brand">
+      <figure class="image navbar-item">
+        <a href="#"><img class="image is-rounded" src="haseulbot.jpg"></a>
+      </figure>
+      <a role="button" class="navbar-burger burger" data-target="main-navbar">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="main-navbar" class="navbar-menu">
+      <div class="navbar-start">
+        <div class="navbar-item has-dropdown">
+          <a class="navbar-link">
+            Commands
+          </a>
+
+          <div id="commands-dropdown" class="navbar-dropdown is-boxed">
+          </div>
+        </div>
       </div>
-      <div id="main-navbar" class="navbar-menu">
-        <div class="navbar-start">
-          <div class="navbar-item has-dropdown">
-            <a class="navbar-link">
-              Commands
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a href="https://discord.gg/w4q5qux" class="button is-dark discord-button">
+              Discord
             </a>
-      
-            <div id="commands-dropdown" class="navbar-dropdown is-boxed">
-              <!-- <a class="navbar-item">
-                About
-              </a>
-              <a class="navbar-item">
-                Jobs
-              </a>
-              <a class="navbar-item">
-                Contact
-              </a> -->
-              <!-- <hr class="navbar-divider">
-              <a class="navbar-item">
-                Report an issue
-              </a> -->
-            </div>
-          </div>
-        </div>
-      
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <a href="https://discord.gg/w4q5qux" class="button is-dark discord-button">
-                Discord
-              </a>
-              <a href="https://www.patreon.com/haseulbot" class="button is-danger patreon-button">
-                Patreon
-              </a>
-            </div>
+            <a href="https://www.patreon.com/haseulbot" class="button is-danger patreon-button">
+              Patreon
+            </a>
           </div>
         </div>
       </div>
-    </section>
-    <section class="section">
-      <div class="container">
-        <div class="columns">
-          <div class="column is-8-desktop is-offset-2-desktop">
-            <div class="content" id="command-content">
-              <div class="banner"></div>
-              <div class="command-header">
-                  <h3><a class="header-link" href="#commands">Commands</a></h3>
-                  <span id="commands" class="anchor-target"></span>
-              </div>
-              <p>
-                Here you will find commands for <strong>Haseul Bot</strong> and instructions on how to use them.
-                <br>
-                <ul>
-                  <li>The default prefix for commands is <code class="has-text-danger">.</code></li>
-                  <li>Hover over or long press <code class="has-text-danger">commands</code> to see their aliases</li>
-                  <li>Hover over or long press <code class="has-text-info">arguments</code> to see examples</li>
-                  <li>Required arguments are in <code class="has-text-info">[brackets]</code></li>
-                  <li>Optional arguments are in <code class="has-text-info">(parentheses)</code></li>
-                  <li>Required permissions are in <span class="button is-dark is-small perm-button">PURPLE</span></li>
-                </ul>
-              </p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          <div class="content" id="command-content">
+            <div class="banner"></div>
+            <div class="command-header">
+              <h3><a class="header-link" href="#commands">Commands</a></h3>
+              <span id="commands" class="anchor-target"></span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <footer class="footer has-text-centered">
-      <div class="container">
-         <div class="columns">
-          <div class="column is-8-desktop is-offset-2-desktop">
             <p>
-              <strong class="has-text-weight-semibold">
-                <a href="https://github.com/haseul/haseul-bot">Haseul/Haseul-Bot</a>
-              </strong>
-            </p>
-            <p>
-              <small>
-                Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
-              </small>
+              Here you will find commands for <strong>Haseul Bot</strong> and instructions on how to use them.
+              <br>
+            <ul>
+              <li>The default prefix for commands is <code class="has-text-danger">.</code></li>
+              <li>Hover over or long press <code class="has-text-danger">commands</code> to see their aliases</li>
+              <li>Hover over or long press <code class="has-text-info">arguments</code> to see examples</li>
+              <li>Required arguments are in <code class="has-text-info">[brackets]</code></li>
+              <li>Optional arguments are in <code class="has-text-info">(parentheses)</code></li>
+              <li>Required permissions are in <span class="button is-dark is-small perm-button">PURPLE</span></li>
+            </ul>
             </p>
           </div>
         </div>
       </div>
-    </footer>
-  </body>
+    </div>
+  </section>
+  <footer class="footer has-text-centered">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-8-desktop is-offset-2-desktop">
+          <p>
+            <strong class="has-text-weight-semibold">
+              <a href="https://github.com/haseul/haseul-bot">Haseul/Haseul-Bot</a>
+            </strong>
+          </p>
+          <p>
+            <small>
+              Source code licensed <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+
 </html>

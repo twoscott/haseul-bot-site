@@ -1,8 +1,8 @@
 $(document).ready(() => {
-	$(".navbar-burger").click((ev) => {
+  $(".navbar-burger").click((ev) => {
     ev.stopPropagation();
     $(".navbar-burger").toggleClass("is-active");
-     $(".navbar-menu").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
   });
   $(".has-dropdown").click((ev) => {
     ev.stopPropagation();
@@ -23,7 +23,7 @@ $(document).ready(() => {
   $(".tooltip").mousemove((e) => {
     for (let tooltipSpan of tooltipSpans) {
       let x = e.clientX,
-          y = e.clientY;
+        y = e.clientY;
       tooltipSpan.style.top = (y - 30) + 'px';
       tooltipSpan.style.left = (x + 10) + 'px';
     }
@@ -59,6 +59,12 @@ const COMMANDS = {
     },
     {
       cmds: [
+        { name: "boosters", aliases: [] }
+      ],
+      desc: "Shows a list of all the users boosting the server.",
+    },
+    {
+      cmds: [
         { name: "botinfo", aliases: ['binfo', 'clientinfo'] }
       ],
       desc: "Shows information about Haseul Bot.",
@@ -82,6 +88,283 @@ const COMMANDS = {
       desc: "Provides a list of all the Discord users who support Haseul Bot on Patreon!",
     }
   ],
+  "Reminders": [
+    {
+      cmds: [
+        { name: "remind" },
+        { name: "me" }
+      ],
+      args: [
+        { name: 'to' },
+        { name: "[reminder]", examples: ['add haseul bot to my server'] },
+        { name: "in" },
+        { name: "[time]", examples: ['3 hours', '10 minutes', '3s', '1hr', '1 yr', '8 weeks', '5m'] },
+      ],
+      desc: "Sets a reminder to be sent to you by Haseul Bot through DMs in the given time.",
+    },
+    {
+      cmds: [
+        { name: "reminder", aliases: ['reminders'] },
+        { name: "list" }
+      ],
+      desc: "Sends a list of all the pending reminders you have set to your DMs.",
+    },
+    {
+      cmds: [
+        { name: "reminders" },
+        { name: "clear" }
+      ],
+      desc: "Deletes all of the pending reminders you have set.",
+    },
+  ],
+  "Management": [
+    {
+      cmds: [
+        { name: "prefix" },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[prefix]", examples: ['.', '!', '-', '_'] },
+      ],
+      desc: "Sets the prefix for Haseul Bot commands. <span class=\"has-text-grey-light\">('.' by default)</span>",
+      perms: ["MANAGE_GUILD"]
+    },
+    {
+      cmds: [
+        { name: "settings" },
+      ],
+      desc: "Displays the current server settings.",
+      perms: ["MANAGE_GUILD"]
+    },
+    {
+      cmds: [
+        { name: "message", aliases: ["msg"] },
+        { name: "send" }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#general-chat</span>", '482759670637789205'] },
+        { name: "[content]", examples: ['Hello!'] }
+      ],
+      desc: "Sends a message to channel through Haseul Bot.",
+      perms: ["MANAGE_MESSAGES"]
+    },
+    {
+      cmds: [
+        { name: "message", aliases: ["msg"] },
+        { name: "edit" }
+      ],
+      args: [
+        { name: "[message url]", examples: ["<a>https://discordapp.com/channels/482594344390623240/482594344390623244/687638163530973215</a>"] },
+        { name: "[new content]", examples: ['Hello! Welcome~'] }
+      ],
+      desc: "Edits a message from Haseul Bot.",
+      perms: ["MANAGE_MESSAGES"]
+    },
+    {
+      cmds: [
+        { name: "message", aliases: ["msg"] },
+        { name: "get" }
+      ],
+      args: [
+        { name: "[message url]", examples: ["<a>https://discordapp.com/channels/482594344390623240/482594344390623244/687638163530973215</a>"] },
+      ],
+      desc: "Fetches a message and returns it in a code block, showing the original formatting with <code class=\"has-text-primary\">_~*\<\></code> characters intact.",
+      perms: ["MANAGE_MESSAGES"]
+    },
+    {
+      cmds: [
+        { name: "poll" },
+        { name: "channel" },
+        { name: "add" }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#suggestions</span>", '482596853792243712'] },
+      ],
+      desc: "Adds a channel where Haseul Bot will react with a check and cross to every message set in it.",
+      perms: ["MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "poll" },
+        { name: "channel" },
+        { name: "remove", aliases: ['delete'] }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#suggestions</span>", '482596853792243712'] },
+      ],
+      desc: "Removes a channel where Haseul Bot reacts with a check and cross to every message set in it.",
+      perms: ["MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "poll" },
+        { name: "toggle" }
+      ],
+      desc: "Toggles Haseul Bot reacting with a checks and crosses to messages sent in poll channels. <span class=\"has-text-grey-light\">(off by default)</span>",
+      perms: ["MANAGE_GUILD"]
+    },
+  ],
+  "Moderation": [
+    {
+      cmds: [
+        { name: "muterole" },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[role name]", examples: ["Muted", "Mute", "<span class=\"discord-tag\" >@Muted</span>"] },
+      ],
+      desc: "Sets the role to be used by the mute command. If a role with the provided name does not exist, a role will be created with that name and its permissions will be altered in every channel to deny the <code class=\"has-text-primary\">SEND_MESSAGES</code>, <code class=\"has-text-primary\">ADD_REACTIONS</code>, <code class=\"has-text-primary\">CONNECT</code>, and <code class=\"has-text-primary\">SPEAK</code> permissions.",
+      perms: ["MANAGE_ROLES"]
+    },
+    {
+      cmds: [
+        { name: "muterole" },
+        { name: "update" }
+      ],
+      desc: "Updates the mute role's permissions in every channel to deny the <code class=\"has-text-primary\">SEND_MESSAGES</code>, <code class=\"has-text-primary\">ADD_REACTIONS</code>, <code class=\"has-text-primary\">CONNECT</code>, and <code class=\"has-text-primary\">SPEAK</code> permissions.",
+      perms: ["MANAGE_ROLES"]
+    },
+    {
+      cmds: [
+        { name: "mute" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Mutes a user or multiple users (up to 5 at once) in the server. Note: a mute role must be set first with the <code class=\"has-text-primary\">.muterole set</code> command.",
+      perms: ["MANAGE_ROLES"]
+    },
+    {
+      cmds: [
+        { name: "unmute" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Unmutes a user or multiple users (up to 5 at once) in the server. Note: a mute role must be set first with the <code class=\"has-text-primary\">.muterole set</code> command.",
+      perms: ["MANAGE_ROLES"]
+    },
+    {
+      cmds: [
+        { name: "kick" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Kicks a user or multiple users (up to 5 at once) from the server.",
+      perms: ["KICK_MEMBERS"]
+    },
+    {
+      cmds: [
+        { name: "ban" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Bans a user or multiple users (up to 5 at once) from the server.",
+      perms: ["BAN_MEMBERS"]
+    },
+    {
+      cmds: [
+        { name: "unban" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Unbans a user or multiple users (up to 5 at once) from the server.",
+      perms: ["BAN_MEMBERS"]
+    },
+    {
+      cmds: [
+        { name: "purge" },
+      ],
+      args: [
+        { name: "[user(s)...]", examples: ["<span class=\"discord-tag\" >@Scotto</span>", "<span class=\"discord-tag\" >@User</span>", "125414437229297664"] },
+        { name: "(reason)", examples: ["was spamming", "was using naughty words"] },
+      ],
+      desc: "Bans a user or multiple users (up to 5 at once) from the server and also deletes all messages from the user(s) in the last 24 hours.",
+      perms: ["BAN_MEMBERS"]
+    },
+  ],
+  "Logs": [
+    {
+      cmds: [
+        { name: "memberlogs", aliases: ['joinlogs', 'joins'] },
+        { name: "channel" },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#member-logs</span>", '482759389426483222'] }
+      ],
+      desc: "Sets the channel for member joins and leaves to be logged in.",
+      perms: ["MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "memberlogs", aliases: ['joinlogs', 'joins'] },
+        { name: "toggle" }
+      ],
+      desc: "Toggles member logs on and off. <span class=\"has-text-grey-light\">(off by default)</span>",
+      perms: ["MANAGE_GUILD"]
+    },
+    {
+      cmds: [
+        { name: "greeter" },
+        { name: "channel" },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#general-chat</span>", '482759670637789205'] }
+      ],
+      desc: "Sets the channel for new members to be welcomed in by Haseul Bot.",
+      perms: ["MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "greeter" },
+        { name: "message", aliases: ['msg'] },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[message]", examples: ["Welcome member #{memberno} - {user} to {server}!", "{default} Please read the rules in <span class=\"discord-tag\" >#rules</span>!"] }
+      ],
+      desc: "Sets the message for Haseul Bot to send when new welcoming new members. You can use the following parameters to insert data based on the user that joined: <ul style=\"margin-top:0.5em;\"><li><code class=\"has-text-primary\">{default}</code> - the default randomised welcome message Haseul Bot generates.</li><li><code class=\"has-text-primary\">{user}</code> - The new user's <span class=\"discord-tag\" >@mention</span>.</li><li><code class=\"has-text-primary\">{username}</code> - The new user's username.</li><li><code class=\"has-text-primary\">{discriminator}</code> - The new user's discriminator (#1234).</li><li><code class=\"has-text-primary\">{usertag}</code> - The new user's username with discriminator (user#1234).</li><li><code class=\"has-text-primary\">{server}</code> - The current server name.</li><li><code class=\"has-text-primary\">{memberno}</code> - The new user's member number (e.g. \"Member number {memberno} has joined!\").</li></ul>",
+      perms: ["MANAGE_GUILD"]
+    },
+    {
+      cmds: [
+        { name: "greeter" },
+        { name: "toggle" }
+      ],
+      desc: "Toggles welcome messages on and off. <span class=\"has-text-grey-light\">(off by default)</span>",
+      perms: ["MANAGE_GUILD"]
+    },
+    {
+      cmds: [
+        { name: "messagelogs", aliases: ['msglogs'] },
+        { name: "channel" },
+        { name: "set" }
+      ],
+      args: [
+        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#message-logs</span>", '482759389426483222'] }
+      ],
+      desc: "Sets the channel for edited and deleted messages to be logged in.",
+      perms: ["MANAGE_CHANNELS"]
+    },
+    {
+      cmds: [
+        { name: "messagelogs", aliases: ['msglogs'] },
+        { name: "toggle" }
+      ],
+      desc: "Toggles message logs on and off. <span class=\"has-text-grey-light\">(off by default)</span>",
+      perms: ["MANAGE_GUILD"]
+    },
+  ],
   "Profiles": [
     {
       cmds: [
@@ -90,7 +373,7 @@ const COMMANDS = {
       args: [
         { name: "(user)", examples: ['<span class=\"discord-tag\" >@Scotto</span>', '125414437229297664'] }
       ],
-      desc: "Shows the profile of a yourself or a provided user.",
+      desc: "Shows the (temporary) profile of a yourself or a provided user.",
     },
     {
       cmds: [
@@ -101,7 +384,7 @@ const COMMANDS = {
     {
       cmds: [
         { name: "leaderboard" },
-        { name: "global"}
+        { name: "global" }
       ],
       desc: "Shows the top users globally based on XP.",
     }
@@ -131,7 +414,7 @@ const COMMANDS = {
     {
       cmds: [
         { name: "repboard" },
-        { name: "global"}
+        { name: "global" }
       ],
       desc: "Shows the top users globally based on reps.",
     },
@@ -144,7 +427,7 @@ const COMMANDS = {
     {
       cmds: [
         { name: "streakboard" },
-        { name: "global"}
+        { name: "global" }
       ],
       desc: "Shows the top pairs of users globally based on rep streaks.",
     },
@@ -276,32 +559,34 @@ const COMMANDS = {
       desc: "Searches YouTube for your query and returns the first 20 results.",
     },
   ],
-  "Instagram": [
+  "Instagram - Disabled due to Instagram changes": [
     {
       cmds: [
         { name: "instagram", aliases: ['insta'] },
         { name: "notification", aliases: ['notif', 'noti'] },
-        { name: "add" }
+        { name: "add" },
+        { name: "<b>(DISABLED)</b>" }////
       ],
       args: [
-        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"] },
         { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] },
         { name: "(mention role)", examples: ["Twitter", "notification"] }
       ],
-      desc: "Adds an Instagram account to be notified for new posts/stories from in the provided channel. If a mention role is provided, that role will be mentioned for notifications.",
+      desc: "Adds an Instagram account to be notified for new posts from in the provided channel. If a mention role is provided, that role will be mentioned for notifications too. Note that the number of Instagram accounts you can add notifications for is limited by your server's member count in the following manner: <ul style=\"margin-top:0.5em;\"><li><code class=\"has-text-primary\">100 members</code> - 1 Instagram account.</li><li><code class=\"has-text-primary\">500 members</code> - 2 Instagram accounts.</li><li><code class=\"has-text-primary\">1,000 members</code> - 3 Instagram accounts.</li></ul>",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     },
     {
       cmds: [
         { name: "instagram", aliases: ['insta'] },
         { name: "notification", aliases: ['notif', 'noti'] },
-        { name: "remove", aliases: ['delete'] }
+        { name: "remove", aliases: ['delete'] },
+        { name: "<b>(DISABLED)</b>" }////
       ],
       args: [
-        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"] },
         { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] }
       ],
-      desc: "Removes an Instagram account notification from the given channel.",
+      desc: "Removes an Instagram account feed from the given channel.",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     },
     {
@@ -310,22 +595,22 @@ const COMMANDS = {
         { name: "notification", aliases: ['notif', 'noti'] },
         { name: "list" }
       ],
-      desc: "Shows a list of all the Instagram notifications you have in the server.",
+      desc: "Shows a list of all the Instagram feeds you have set up in the server.",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     },
-    {
-      cmds: [
-        { name: "instagram", aliases: ['insta'] },
-        { name: "toggle"},
-        { name: "stories", aliases: ['story'] }
-      ],
-      args: [
-        { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] }
-      ],
-      desc: "Toggles notifications from Instagram stories. <span class=\"has-text-grey-light\">(on by default)</span>",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    }
+    // {
+    //   cmds: [
+    //     { name: "instagram", aliases: ['insta'] },
+    //     { name: "toggle"},
+    //     { name: "stories", aliases: ['story'] }
+    //   ],
+    //   args: [
+    //     { name: "[instagram account]", examples: ["loonatheworld", "<a>https://www.instagram.com/loonatheworld/</a>"]},
+    //     { name: "[channel]", examples: ["<span class=\"discord-tag\" >#instagram-feed</span>", '482750802377703426'] }
+    //   ],
+    //   desc: "Toggles notifications from Instagram stories. <span class=\"has-text-grey-light\">(on by default)</span>",
+    //   perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
+    // }
   ],
   "Twitter": [
     {
@@ -335,11 +620,11 @@ const COMMANDS = {
         { name: "add" }
       ],
       args: [
-        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"] },
         { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] },
         { name: "(mention role)", examples: ["Twitter", "notification"] }
       ],
-      desc: "Adds a Twitter account to be notified for new tweets/retweets from in the provided channel. If a mention role is provided, that role will be mentioned for notifications.",
+      desc: "Adds a Twitter account to be notified for new tweets/retweets from in the provided channel. If a mention role is provided, that role will be mentioned for notifications. Note that you can have notifications for up to 3 Twitter accounts per server.",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     },
     {
@@ -349,7 +634,7 @@ const COMMANDS = {
         { name: "remove", aliases: ['delete'] }
       ],
       args: [
-        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"] },
         { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] }
       ],
       desc: "Removes a Twitter account notification from the given channel.",
@@ -367,25 +652,26 @@ const COMMANDS = {
     {
       cmds: [
         { name: "twitter", aliases: ['twt'] },
-        { name: "toggle"},
+        { name: "toggle" },
         { name: "retweets", aliases: ['rts'] }
       ],
       args: [
-        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"]},
+        { name: "[twitter account]", examples: ["loonatheworld", "<a>https://twitter.com/loonatheworld/</a>"] },
         { name: "[channel]", examples: ["<span class=\"discord-tag\" >#twitter-feed</span>", '482750802377703426'] }
       ],
       desc: "Toggles notifications from retweets. <span class=\"has-text-grey-light\">(on by default)</span>",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     }
   ],
-  "VLIVE": [
+  "VLIVE - Currently Disabled until Haseul Bot 2.0": [
     {
       cmds: [
         { name: "vlive" },
-        { name: "channel", aliases: ['channelinfosudi'] }
+        { name: "channel", aliases: ['channelinfosudi'] },
+        { name: "<b>(CURRENTLY DISABLED)</b>" }////
       ],
       args: [
-        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"]}
+        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"] }
       ],
       desc: "Shows information about a VLIVE channel."
     },
@@ -393,10 +679,11 @@ const COMMANDS = {
       cmds: [
         { name: "vlive" },
         { name: "notification", aliases: ['notif', 'noti'] },
-        { name: "add" }
+        { name: "add" },
+        { name: "<b>(CURRENTLY DISABLED)</b>" }////
       ],
       args: [
-        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"]},
+        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"] },
         { name: "[discord channel]", examples: ["<span class=\"discord-tag\" >#vlive-feed</span>", '482750802377703426'] },
         { name: "(mention role)", examples: ["VLIVE", "notification"] }
       ],
@@ -407,10 +694,11 @@ const COMMANDS = {
       cmds: [
         { name: "vlive" },
         { name: "notification", aliases: ['notif', 'noti'] },
-        { name: "remove", aliases: ['delete'] }
+        { name: "remove", aliases: ['delete'] },
+        { name: "<b>(CURRENTLY DISABLED)</b>" }////
       ],
       args: [
-        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"]},
+        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"] },
         { name: "[discord channel]", examples: ["<span class=\"discord-tag\" >#vlive-feed</span>", '482750802377703426'] }
       ],
       desc: "Removes a VLIVE channel notification from the given channel.",
@@ -418,21 +706,23 @@ const COMMANDS = {
     },
     {
       cmds: [
-        { name: "vlive"},
+        { name: "vlive" },
         { name: "notification", aliases: ['notif', 'noti'] },
-        { name: "list" }
+        { name: "list" },
+        { name: "<b>(CURRENTLY DISABLED)</b>" }////
       ],
       desc: "Shows a list of all the VLIVE notifications you have in the server.",
       perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
     },
     {
       cmds: [
-        { name: "vlive"},
-        { name: "toggle"},
-        { name: "vpick"}
+        { name: "vlive" },
+        { name: "toggle" },
+        { name: "vpick" },
+        { name: "<b>(CURRENTLY DISABLED)</b>" }////
       ],
       args: [
-        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"]},
+        { name: "[vlive channel]", examples: ["LOONA", "<a>https://channels.vlive.tv/E1F3A7/home</a>"] },
         { name: "[discord channel]", examples: ["<span class=\"discord-tag\" >#vlive-feed</span>", '482750802377703426'] }
       ],
       desc: "Toggles notifications from VPICK. <span class=\"has-text-grey-light\">(on by default)</span>",
@@ -446,7 +736,7 @@ const COMMANDS = {
         { name: "add" }
       ],
       args: [
-        { name: "(type)", examples: ["STRICT", "NORMAL", "LENIENT"]},
+        { name: "(type)", examples: ["STRICT", "NORMAL", "LENIENT"] },
         { name: "[keyword]", examples: ["haseul"] }
       ],
       desc: "Adds a keyword to be notified of when mentioned by a user in the server.<ul style=\"margin-top:0.5em;\"><li><code class=\"has-text-primary\">STRICT</code> - will only notify you for whole words, case sensitive, no plurals.</li><li><code class=\"has-text-primary\">NORMAL</code> - will only notify you for whole words, case insensitive, includes plurals. <span class=\"has-text-grey-light\">(default)</span></li><li><code class=\"has-text-primary\">LENIENT</code> - case insensitive, includes plurals, letter-number replacements.</li><li><code class=\"has-text-primary\">ANARCHY</code> - repeating characters, non-letters between characters and letter-number swaps <span class=\"has-text-grey-light\">(e.g. $. c 0 t7 0 = scotto)</span></li></ul>",
@@ -482,7 +772,7 @@ const COMMANDS = {
         { name: "add" }
       ],
       args: [
-        { name: "(type)", examples: ["STRICT", "NORMAL", "LENIENT"]},
+        { name: "(type)", examples: ["STRICT", "NORMAL", "LENIENT"] },
         { name: "[keyword]", examples: ["haseul"] }
       ],
       desc: "Adds a keyword to be notified of when mentioned by a user in any server that you and Haseul Bot are both in.<ul style=\"margin-top:0.5em;\"><li><code class=\"has-text-primary\">STRICT</code> - will only notify you for whole words, case sensitive, no plurals.</li><li><code class=\"has-text-primary\">NORMAL</code> - will only notify you for whole words, case insensitive, includes plurals. <span class=\"has-text-grey-light\">(default)</span></li><li><code class=\"has-text-primary\">LENIENT</code> - case insensitive, includes plurals, letter-number replacements.</li><li><code class=\"has-text-primary\">ANARCHY</code> - repeating characters, non-letters between characters and letter-number swaps <span class=\"has-text-grey-light\">(e.g. $. c 0 t7 0 = scotto)</span></li></ul>",
@@ -532,6 +822,13 @@ const COMMANDS = {
         { name: "server", aliases: ['purge'] }
       ],
       desc: "Toggles notifications for keywords in the server.",
+    },
+    {
+      cmds: [
+        { name: "notification", aliases: ['notif', 'noti'] },
+        { name: "dnd", aliases: ['donotdisturb'] },
+      ],
+      desc: "Toggles \"do not disturb\" mode.",
     },
   ],
   "Custom Commands": [
@@ -588,6 +885,14 @@ const COMMANDS = {
     {
       cmds: [
         { name: "command", aliases: ['commands', 'cmd'] },
+        { name: "list" },
+        { name: "raw" }
+      ],
+      desc: "Sends a JSON file with all the commands in the server."
+    },
+    {
+      cmds: [
+        { name: "command", aliases: ['commands', 'cmd'] },
         { name: "search" }
       ],
       args: [
@@ -630,60 +935,6 @@ const COMMANDS = {
       ],
       desc: "Lists all the custom emojis matching your query."
     },
-  ],
-  "Member Logs": [
-    {
-      cmds: [
-        { name: "joinlogs", aliases: ['memberlogs', 'joins'] },
-        { name: "channel" },
-        { name: "set" }
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#member-logs</span>", '482759389426483222'] }
-      ],
-      desc: "Sets the channel for member joins and leaves to be logged.",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    },
-    {
-      cmds: [
-        { name: "joinlogs", aliases: ['memberlogs', 'joins'] },
-        { name: "toggle" }
-      ],
-      desc: "Toggles member logs on and off. <span class=\"has-text-grey-light\">(off by default)</span>",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    },
-    {
-      cmds: [
-        { name: "greeter" },
-        { name: "channel" },
-        { name: "set" }
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#general-chat</span>", '482759670637789205'] }
-      ],
-      desc: "Sets the channel for new members to be welcomed in by Haseul Bot.",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    },
-    {
-      cmds: [
-        { name: "greeter" },
-        { name: "message", aliases: ['msg'] },
-        { name: "set" }
-      ],
-      args: [
-        { name: "[message]", examples: ["Welcome member #{memberno} - {user} to {server}!", "{default} Please read the rules in <span class=\"discord-tag\" >#rules</span>!"] }
-      ],
-      desc: "Sets the message for Haseul Bot to send when new members join.",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    },
-    {
-      cmds: [
-        { name: "greeter" },
-        { name: "toggle" }
-      ],
-      desc: "Toggles welcome messages on and off. <span class=\"has-text-grey-light\">(off by default)</span>",
-      perms: ["MANAGE_GUILD", "MANAGE_CHANNELS"]
-    }
   ],
   "Roles": [
     {
@@ -805,74 +1056,6 @@ const COMMANDS = {
       perms: ["MANAGE_GUILD", "MANAGE_ROLES"]
     },
   ],
-  "Management": [
-    {
-      cmds: [
-        { name: "say" },
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#general-chat</span>", '482759670637789205'] },
-        { name: "[content]", examples: ['Hello!'] }
-      ],
-      desc: "Sends a message to channel through Haseul Bot.",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-    {
-      cmds: [
-        { name: "edit" },
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#general-chat</span>", '482759670637789205'] },
-        { name: "[message ID]", examples: ['612019141813207051'] },
-        { name: "[new content]", examples: ['Hello! Welcome~'] }
-      ],
-      desc: "Edits a message from Haseul Bot.",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-    {
-      cmds: [
-        { name: "get" },
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#welcome</span>", '482759670637789205'] },
-        { name: "[message ID]", examples: ['491062821564448778'] },
-      ],
-      desc: "Fetches a message and returns it in a code block, showing the original formatting with <code class=\"has-text-primary\">_~*\<\></code> characters intact.",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-    {
-      cmds: [
-        { name: "poll" },
-        { name: "channel" },
-        { name: "add" }
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#suggestions</span>", '482596853792243712'] },
-      ],
-      desc: "Adds a channel where Haseul Bot will react with a check and cross to every message set in it.",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-    {
-      cmds: [
-        { name: "poll" },
-        { name: "channel" },
-        { name: "remove", aliases: ['delete'] }
-      ],
-      args: [
-        { name: "[channel]", examples: ["<span class=\"discord-tag\" >#suggestions</span>", '482596853792243712'] },
-      ],
-      desc: "Removes a channel where Haseul Bot reacts with a check and cross to every message set in it.",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-    {
-      cmds: [
-        { name: "poll" },
-        { name: "toggle" }
-      ],
-      desc: "Toggles Haseul Bot reacting with a checks and crosses to messages sent in poll channels. <span class=\"has-text-grey-light\">(off by default)</span>",
-      perms: ["MANAGE_GUILD", "MANAGE_MESSAGES"]
-    },
-  ],
   "Misc": [
     // {
     //   name: "color",
@@ -914,7 +1097,7 @@ function createElement(settings) {
     if (settings.space) {
       text = settings.text + " ";
     }
-    
+
     baseElem.innerHTML = text;
   }
 
@@ -925,7 +1108,7 @@ function createElement(settings) {
   if (settings.id) {
     baseElem.id = settings.id;
   }
-  
+
   if (settings.href) {
     baseElem.href = settings.href;
   }
@@ -944,7 +1127,7 @@ document.addEventListener('DOMContentLoaded', function () {
   for (let category in COMMANDS) {
     if (!COMMANDS.hasOwnProperty(category)) {
       continue;
-	  }
+    }
     const cmdDropdown = document.getElementById("commands-dropdown")
     const commandHref = category.toLowerCase().replace(/\s+/, '-');
 
@@ -952,7 +1135,7 @@ document.addEventListener('DOMContentLoaded', function () {
       element: "a",
       text: category,
       className: "navbar-item",
-      href: '#'+commandHref
+      href: '#' + commandHref
     }));
 
     const cardElem = document.createElement("div");
@@ -971,31 +1154,30 @@ document.addEventListener('DOMContentLoaded', function () {
     cardHeaderTitle.appendChild(createElement({
       element: "a",
       text: category,
-      href: '#'+cardHeaderAnchor.id,
+      href: '#' + cardHeaderAnchor.id,
       className: "header-link"
     }))
 
     cardHeader.appendChild(cardHeaderTitle);
     cardHeader.appendChild(cardHeaderAnchor);
     cardElem.appendChild(cardHeader);
-    
+
     const cardContent = document.createElement("div");
     cardContent.className = "card-content";
 
     for (let index in COMMANDS[category]) {
       const command = COMMANDS[category][index];
-      // let cmdElem = document.createElement("div");
-      
+
       if (command.cmds) {
-        for (let i=0; i < command.cmds.length; i++) {
+        for (let i = 0; i < command.cmds.length; i++) {
           let { name, aliases } = command.cmds[i];
           let cmdElem = createElement({
             element: "code",
-            text: `${i==0?PREFIX:''}${name}`,
-            space: i < command.cmds.length-1 || command.args,
+            text: `${i == 0 ? PREFIX : ''}${name}`,
+            space: i < command.cmds.length - 1 || command.args,
             className: "has-text-danger"
           })
-          
+
           if (aliases) {
             cmdElem.classList.add("tooltip");
             let toolElem = document.createElement("span");
@@ -1006,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             tooltip.appendChild(createElement({
               element: "span",
-              text: (i==0 ? aliases.map(x => !x.startsWith('<span class=\"discord-tag\"') ? PREFIX+x : x) : aliases).join(', '),
+              text: (i == 0 ? aliases.map(x => !x.startsWith('<span class=\"discord-tag\"') ? PREFIX + x : x) : aliases).join(', '),
               className: "has-text-light"
             }))
             toolElem.appendChild(tooltip);
@@ -1017,15 +1199,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       if (command.args) {
-        for (let i=0; i < command.args.length; i++) {
+        for (let i = 0; i < command.args.length; i++) {
           let { name, examples } = command.args[i];
           let argElem = createElement({
             element: "code",
             text: name,
-            space: i < command.args.length-1,
+            space: i < command.args.length - 1,
             className: "has-text-info"
           })
-          
+
           if (examples) {
             argElem.classList.add("tooltip");
             let toolElem = document.createElement("span");
@@ -1045,16 +1227,6 @@ document.addEventListener('DOMContentLoaded', function () {
           cardContent.appendChild(argElem);
         }
       }
-
-      // command usage
-      // if (command.usage) {
-      //   cardContent.appendChild(createElement({
-      //     element: "code",
-      //     text: command.usage,
-      //     space: false,
-      //     className: "has-text-info",
-      //   }));
-      // }
 
       if (command.perms) {
         for (let perm of command.perms) {
@@ -1076,18 +1248,14 @@ document.addEventListener('DOMContentLoaded', function () {
         element: "br",
       }));
 
-      // command description
-
       cardContent.appendChild(createElement({
         element: "p",
         text: "└ " + command.desc
       }));
+    }
 
-      // cardContent.appendChild(cmdElem);
-	  }
-	
     cardElem.appendChild(cardContent);
     commandSection.appendChild(cardElem);
-    
+
   }
 });
